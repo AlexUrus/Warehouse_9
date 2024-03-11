@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WarehouseJournal.View.MainPage"
+             xmlns:vm="clr-namespace:WarehouseJournal.ViewModel"
+             Title="NewPage1">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    
+    <StackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Использовать фильтры" HorizontalOptions="Center"/>
+            <Switch IsToggled="{Binding IsUsingFilter}"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+            <Label Text="Товар в одном экземпляре" IsVisible="{Binding IsEnabledForFilters}" HorizontalOptions="Center"/>
+            <CheckBox IsChecked="{Binding IsSingleItem}" IsVisible="{Binding IsEnabledForFilters}"
+                      IsEnabled="{Binding IsEnabledForFilters}" HorizontalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <Entry Placeholder="Поиск" Text="{Binding SearchItemString}"/>
+
+        <Label Text="Список товаров на складе:"/>
+        <CollectionView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
+                        x:Name="collection"
+                        VerticalOptions="FillAndExpand" SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Удалить" Command="{Binding Source={x:Reference Name=collection}, Path=BindingContext.DeleteItemCommand}" CommandParameter="{Binding .}"/>
+                                <SwipeItem Text="Изменить" Command="{Binding Source={x:Reference Name=collection}, Path=BindingContext.ChangeItemCommand}" CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" Text="{Binding Id}"/>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="{Binding Name}"/>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Text="{Binding Count}"/>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="WarehouseJournal.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WarehouseJournal"
+    xmlns:views="clr-namespace:WarehouseJournal.View"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
+
+    <FlyoutItem>
+        <ShellContent Route="MainPage" Title="Main" ContentTemplate="{DataTemplate views:MainPage}"/>
+        <ShellContent Route="AddItemPage" Title="Add" ContentTemplate="{DataTemplate views:AddItemPage}"/>
+    </FlyoutItem>
+    <ShellContent Route="ChangeItemPage" Title="Change" ContentTemplate="{DataTemplate views:ChangeItemPage}"/>
+    <ShellContent Route="QRScannerPage" Title="QRScanner" ContentTemplate="{DataTemplate views:QRScannerPage}"/>
+</Shell>
