@@ -19,7 +19,7 @@ namespace WarehouseJournal.ViewModel
         [RelayCommand]
         private async Task ChangeItem()
         {
-            if(Item.Name != string.Empty && Item.Count > 0)
+            if(Item.Name != string.Empty && Item.Count > 0 && Item.Cost > 0)
             {
                 await App.DataBase.UpdateItemAsync(Item);
                 await Application.Current.MainPage.DisplayAlert("ОК", "Товар успешно изменен", "ОК");

@@ -15,6 +15,12 @@
                          HeightRequest="50" WidthRequest="50" HorizontalOptions="End"/>
         </Grid>
         <Entry Text="{Binding Count}" Keyboard="Numeric"/>
+        <Entry Text="{Binding Cost}" Keyboard="Numeric"/>
+        <Picker Title="Select Item Type"
+            ItemsSource="{Binding ItemTypes}"
+            SelectedItem="{Binding SelectedItemType}">
+        </Picker>
+
         <Button Command="{Binding AddItemCommand}" Text="Добавить товар"/>
     </StackLayout>
 </ContentPage>

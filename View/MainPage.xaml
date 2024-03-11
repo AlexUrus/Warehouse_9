@@ -21,6 +21,10 @@
         </HorizontalStackLayout>
 
         <Entry Placeholder="Поиск" Text="{Binding SearchItemString}"/>
+        <Picker Title="Select Item Type"
+                ItemsSource="{Binding ItemTypes}"
+                SelectedItem="{Binding SelectedItemType}">  
+        </Picker>
 
         <Label Text="Список товаров на складе:"/>
         <CollectionView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
@@ -41,6 +45,8 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="5*"/>
                                 <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50"/>
@@ -48,6 +54,8 @@
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" Text="{Binding Id}"/>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="{Binding Name}"/>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Text="{Binding Count}"/>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="3" Text="{Binding Cost}"/>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="4" Text="{Binding ItemType}"/>
                         </Grid>
                     </SwipeView>
                 </DataTemplate>

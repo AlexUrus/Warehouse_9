@@ -72,6 +72,32 @@ namespace WarehouseJournal.ViewModel
             }
         }
 
+        private ObservableCollection<string> itemTypes;
+        public ObservableCollection<string> ItemTypes
+        {
+            get => itemTypes;
+            set
+            {
+                itemTypes = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string selectedItemType;
+        public string SelectedItemType
+        {
+            get
+            {
+                return selectedItemType;
+            }
+            set
+            {
+                selectedItemType = value;
+                SearchByItemType((ItemType)Enum.Parse(typeof(ItemType), selectedItemType, true));
+                OnPropertyChanged();
+            }
+        }
+
         // товар в одном экзмемпляре
         private bool isSingleItem;
         public bool IsSingleItem
@@ -101,6 +127,12 @@ namespace WarehouseJournal.ViewModel
             itemList.AddRange(items);
             ObservableCollection<Item> itemCollection = new ObservableCollection<Item>(itemList);
             Items = itemCollection;
+
+            ItemTypes = new ObservableCollection<string>();
+            foreach (var itemType in System.Enum.GetValues(typeof(ItemType)))
+            {
+                ItemTypes.Add(itemType.ToString());
+            }
         }
 
         [RelayCommand]
@@ -126,6 +158,19 @@ namespace WarehouseJournal.ViewModel
             if(SearchItemString != "")
             {
                 Items = new ObservableCollection<Item>(Items.Where(x => x.Name.ToLower().Contains(search.ToLower())).ToList());
+            }
+            else
+            {
+                Items = new ObservableCollection<Item>(itemList);
+            }
+            return Items;
+        }
+
+        private ObservableCollection<Item> SearchByItemType(ItemType itemType)
+        {
+            if (itemType != ItemType.None)
+            {
+                Items = new ObservableCollection<Item>(Items.Where(x => x.ItemType == itemType).ToList());
             }
             else
             {
