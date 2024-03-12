@@ -50,6 +50,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\qrscan.png" />
+	  <None Remove="Resources\Images\warehouse.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>

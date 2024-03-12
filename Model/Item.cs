@@ -14,6 +14,6 @@ namespace WarehouseJournal.Model
         public string Name { get; set; }
         public int Count { get; set; }
         public double Cost { get; set; }
-        public ItemType ItemType { get; set; }
+        public string ItemType { get; set; }
     }
 }

@@ -7,10 +7,20 @@ using System.Threading.Tasks;
 
 namespace WarehouseJournal.Model
 {
-    public enum ItemType
+    public class ItemType
     {
-        None = 0,
-        Grocery = 1,
-        MilkProducts = 2
+        public string Type { get; set;}
+
+        public static List<ItemType> Types = new List<ItemType>()
+        {
+            new("Без типа"),
+            new("Молочная продукция"),
+            new("Бакалея")
+        };
+
+        private ItemType(string type) 
+        {
+            Type = type;
+        }
     }
 }

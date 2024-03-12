@@ -93,7 +93,7 @@ namespace WarehouseJournal.ViewModel
             set
             {
                 selectedItemType = value;
-                SearchByItemType((ItemType)Enum.Parse(typeof(ItemType), selectedItemType, true));
+                SearchByItemType(ItemType.Types.FirstOrDefault(x => x.Type == selectedItemType));
                 OnPropertyChanged();
             }
         }
@@ -127,11 +127,11 @@ namespace WarehouseJournal.ViewModel
             itemList.AddRange(items);
             ObservableCollection<Item> itemCollection = new ObservableCollection<Item>(itemList);
             Items = itemCollection;
-
             ItemTypes = new ObservableCollection<string>();
-            foreach (var itemType in System.Enum.GetValues(typeof(ItemType)))
+
+            foreach (var itemType in ItemType.Types)
             {
-                ItemTypes.Add(itemType.ToString());
+                ItemTypes.Add(itemType.Type);
             }
         }
 
@@ -168,9 +168,9 @@ namespace WarehouseJournal.ViewModel
 
         private ObservableCollection<Item> SearchByItemType(ItemType itemType)
         {
-            if (itemType != ItemType.None)
+            if (itemType != ItemType.Types[0])
             {
-                Items = new ObservableCollection<Item>(Items.Where(x => x.ItemType == itemType).ToList());
+                Items = new ObservableCollection<Item>(Items.Where(x => x.ItemType == itemType.Type).ToList());
             }
             else
             {

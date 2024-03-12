@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace WarehouseJournal.ViewModel
     [QueryProperty(nameof(Name), nameof(Name))]
     [QueryProperty(nameof(Count), nameof(Count))]
     [QueryProperty(nameof(Cost), nameof(Cost))]
-    [QueryProperty(nameof(ItemType), nameof(ItemType))]
+    [QueryProperty(nameof(SelectedItemType), nameof(SelectedItemType))]
     public partial class AddItemPageViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -26,25 +27,31 @@ namespace WarehouseJournal.ViewModel
         private double cost;
 
         [ObservableProperty]
-        private ItemType itemType = ItemType.None;
+        private string selectedItemType = string.Empty;
 
         [ObservableProperty]
-        private List<string> itemTypes;
+        private ObservableCollection<string> itemTypes;
 
-        [ObservableProperty]
-        private string selectedItemType;
+        public AddItemPageViewModel()
+        {
+            ItemTypes = new ObservableCollection<string>();
+            foreach (var itemType in ItemType.Types)
+            {
+                ItemTypes.Add(itemType.Type);       
+            }
+        }
 
         [RelayCommand]
         private async Task AddItem()
         {
-            if(Name != string.Empty && Count > 0 && Cost > 0)
+            if(Name != string.Empty && Count > 0 && Cost > 0 && SelectedItemType != string.Empty)
             {
                 await App.DataBase.SaveItemAsync(new Model.Item
                 {
                     Name = this.Name,
                     Count = this.Count,
                     Cost = this.Cost,
-                    ItemType = this.ItemType
+                    ItemType = this.SelectedItemType
                 });
 
                 await Application.Current.MainPage.DisplayAlert("ОК", "Товар добавлен", "ОК");

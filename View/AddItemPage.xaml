@@ -16,7 +16,7 @@
         </Grid>
         <Entry Text="{Binding Count}" Keyboard="Numeric"/>
         <Entry Text="{Binding Cost}" Keyboard="Numeric"/>
-        <Picker Title="Select Item Type"
+        <Picker Title="Выберите тип товара"
             ItemsSource="{Binding ItemTypes}"
             SelectedItem="{Binding SelectedItemType}">
         </Picker>
