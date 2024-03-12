@@ -21,8 +21,10 @@ public partial class QRScannerPage : ContentPage
 			var navigationParameter = new Dictionary<string, object>()
 			{
 				{"Name", item.Name },
-				{"Count", item.Count }	
-			};
+				{"Count", item.Count },
+                {"Cost", item.Cost },
+                {"SelectedItemType", item.ItemType },
+            };
 
 			barcodereader.IsDetecting = false;
             await Shell.Current.GoToAsync("//AddItemPage", navigationParameter);
