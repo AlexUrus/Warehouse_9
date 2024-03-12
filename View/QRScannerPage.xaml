@@ -4,11 +4,15 @@
              x:Class="WarehouseJournal.View.QRScannerPage"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              Title="QRScannerPage">
-    <VerticalStackLayout>
-        <zxing:CameraBarcodeReaderView
-            x:Name="barcodereader"
-            WidthRequest="300"
-            HeightRequest="600"
-            BarcodesDetected="BarcodesDetected"/>
-    </VerticalStackLayout>
+    <Grid>
+        <Image Source="/Resources/Images/warehouse.jpg" Opacity="0.3"/>
+        <VerticalStackLayout>
+            
+            <zxing:CameraBarcodeReaderView
+        x:Name="barcodereader"
+        WidthRequest="300"
+        HeightRequest="600"
+        BarcodesDetected="BarcodesDetected"/>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

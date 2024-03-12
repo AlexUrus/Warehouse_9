@@ -7,15 +7,18 @@
     <ContentPage.BindingContext>
         <vm:ChangeItemPageViewModel/>
     </ContentPage.BindingContext>
+    <Grid>
+        <Image Source="/Resources/Images/warehouse.jpg" Opacity="0.3"/>
+        <StackLayout>
 
-    <StackLayout>
-        <Entry Text="{Binding Item.Name}" Placeholder="Наименование товара"/>
-        <Entry Text="{Binding Item.Count}" Keyboard="Numeric"/>
-        <Entry Text="{Binding Item.Cost}" Keyboard="Numeric"/>
-        <Picker Title="Выберите тип товара"
-                ItemsSource="{Binding ItemTypes}"
-                SelectedItem="{Binding Item.ItemType}">  
-        </Picker>
-        <Button Command="{Binding ChangeItemCommand}" Text="Изменить товар"/>
-    </StackLayout>
+            <Entry Text="{Binding Item.Name}" Placeholder="Наименование товара"/>
+            <Entry Text="{Binding Item.Count}" Keyboard="Numeric"/>
+            <Entry Text="{Binding Item.Cost}" Keyboard="Numeric"/>
+            <Picker Title="Выберите тип товара"
+            ItemsSource="{Binding ItemTypes}"
+            SelectedItem="{Binding Item.ItemType}">
+            </Picker>
+            <Button Command="{Binding ChangeItemCommand}" Text="Изменить товар"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

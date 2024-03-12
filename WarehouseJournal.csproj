@@ -49,6 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\delete_button.png" />
+	  <None Remove="Resources\Images\edit_button.png" />
 	  <None Remove="Resources\Images\qrscan.png" />
 	  <None Remove="Resources\Images\warehouse.jpg" />
 	</ItemGroup>

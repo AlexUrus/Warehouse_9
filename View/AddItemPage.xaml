@@ -8,19 +8,22 @@
         <vm:AddItemPageViewModel/>
     </ContentPage.BindingContext>
     
-    <StackLayout>
-        <Grid>
-            <Entry Text="{Binding Name}" Placeholder="Наименование товара"/>
-            <ImageButton Source="/Resources/Images/qrscan.png" Command="{Binding QRScanCommand}"
-                         HeightRequest="50" WidthRequest="50" HorizontalOptions="End"/>
-        </Grid>
-        <Entry Text="{Binding Count}" Keyboard="Numeric"/>
-        <Entry Text="{Binding Cost}" Keyboard="Numeric"/>
-        <Picker Title="Выберите тип товара"
-            ItemsSource="{Binding ItemTypes}"
-            SelectedItem="{Binding SelectedItemType}">
-        </Picker>
+    <Grid>
+        <Image Source="/Resources/Images/warehouse.jpg" Opacity="0.3"/>
+        <StackLayout>
+            <Grid>
+                <Entry Text="{Binding Name}" Placeholder="Наименование товара" TextColor="Black"/>
+                <ImageButton Source="/Resources/Images/qrscan.png" Command="{Binding QRScanCommand}"
+                     HeightRequest="50" WidthRequest="50" HorizontalOptions="End"/>
+            </Grid>
+            <Entry Text="{Binding Count}" Keyboard="Numeric"/>
+            <Entry Text="{Binding Cost}" Keyboard="Numeric"/>
+            <Picker Title="Выберите тип товара"
+        ItemsSource="{Binding ItemTypes}"
+        SelectedItem="{Binding SelectedItemType}">
+            </Picker>
 
-        <Button Command="{Binding AddItemCommand}" Text="Добавить товар"/>
-    </StackLayout>
+            <Button Command="{Binding AddItemCommand}" Text="Добавить товар"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

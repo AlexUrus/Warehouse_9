@@ -8,83 +8,67 @@
         <vm:MainPageViewModel/>
     </ContentPage.BindingContext>
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Styles/Colors.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <Grid Padding="10">
+        <Image Source="/Resources/Images/warehouse.jpg" Opacity="0.3"/>
         <StackLayout Grid.Row="1">
-            <Frame Background="{StaticResource Primary}" CornerRadius="10">
-                <HorizontalStackLayout>
-                    <Label Text="Использовать фильтры" HorizontalOptions="Center" TextColor="{StaticResource Secondary}"/>
-                    <Switch IsToggled="{Binding IsUsingFilter}" ThumbColor="{StaticResource Secondary}"/>
-                </HorizontalStackLayout>
-            </Frame>
+            <HorizontalStackLayout>
+                <Label Text="Использовать фильтры" HorizontalOptions="Center"/>
+                <Switch IsToggled="{Binding IsUsingFilter}"/>
+            </HorizontalStackLayout>
 
-            <Frame Background="{StaticResource Primary}" CornerRadius="10">
-                <HorizontalStackLayout>
-                    <Label Text="Товар в одном экземпляре" IsVisible="{Binding IsEnabledForFilters}" HorizontalOptions="Center" TextColor="{StaticResource Secondary}"/>
+            <HorizontalStackLayout>
+                <Label Text="Товар в одном экземпляре" IsVisible="{Binding IsEnabledForFilters}" HorizontalOptions="Center"/>
                 <CheckBox IsChecked="{Binding IsSingleItem}" IsVisible="{Binding IsEnabledForFilters}"
-                  IsEnabled="{Binding IsEnabledForFilters}" HorizontalOptions="Center" Color="{StaticResource Secondary}"/>
-                </HorizontalStackLayout>
-            </Frame>
-            
-            <Frame Background="{StaticResource Primary}" CornerRadius="10">
-                <HorizontalStackLayout>
-                    <Entry Placeholder="Поиск" Text="{Binding SearchItemString}"/>
-                    <Picker Title="Выберите тип товара"
-                    ItemsSource="{Binding ItemTypes}"
-                    SelectedItem="{Binding SelectedItemType}"
-                    TextColor="{StaticResource Secondary}">
-                    </Picker>
-                </HorizontalStackLayout>
-            </Frame>
+                          IsEnabled="{Binding IsEnabledForFilters}" HorizontalOptions="Center"/>
+            </HorizontalStackLayout>
 
-            <Frame Background="{StaticResource Primary}" CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label Text="Список товаров на складе:" TextColor="{StaticResource Secondary}"/>
-                    <ScrollView>
-                        <CollectionView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
-                                         x:Name="collection"
-                                         VerticalOptions="FillAndExpand" SelectionMode="Single">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <SwipeView>
-                                        <SwipeView.LeftItems>
-                                            <SwipeItems>
-                                                <SwipeItem Text="Удалить" Command="{Binding Source={x:Reference Name=collection}, Path=BindingContext.DeleteItemCommand}" CommandParameter="{Binding .}"/>
-                                                <SwipeItem Text="Изменить" Command="{Binding Source={x:Reference Name=collection}, Path=BindingContext.ChangeItemCommand}" CommandParameter="{Binding .}"/>
-                                            </SwipeItems>
-                                        </SwipeView.LeftItems>
+            <HorizontalStackLayout>
+                <Entry Placeholder="Поиск" Text="{Binding SearchItemString}" TextColor="Black"/>
+                <Picker Title="Выберите тип товара"
+                        ItemsSource="{Binding ItemTypes}"
+                        SelectedItem="{Binding SelectedItemType}">      
+                </Picker>
+            </HorizontalStackLayout>
 
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="2*"/>
-                                                <ColumnDefinition Width="5*"/>
-                                                <ColumnDefinition Width="2*"/>
-                                                <ColumnDefinition Width="2*"/>
-                                                <ColumnDefinition Width="5*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="50"/>
-                                            </Grid.RowDefinitions>
-                                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" Text="{Binding Id}" TextColor="{StaticResource Secondary}"/>
-                                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="{Binding Name}" TextColor="{StaticResource Secondary}"/>
-                                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Text="{Binding Count}" TextColor="{StaticResource Secondary}"/>
-                                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="3" Text="{Binding Cost}" TextColor="{StaticResource Secondary}"/>
-                                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="4" Text="{Binding ItemType}" TextColor="{StaticResource Secondary}" />
-                                        </Grid>
-                                    </SwipeView>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </ScrollView>
-                </VerticalStackLayout>
-            </Frame>
+            <VerticalStackLayout>
+                <Label Text="Список товаров на складе:" />
+                <ScrollView>
+                    <CollectionView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
+                         x:Name="collection"
+                         VerticalOptions="FillAndExpand" SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems>
+                                            <SwipeItem IconImageSource="/Resources/Images/delete_button.png" Command="{Binding Source={x:Reference Name=collection}, Path=BindingContext.DeleteItemCommand}" CommandParameter="{Binding .}"/>
+                                            <SwipeItem IconImageSource="/Resources/Images/edit_button.png" Command="{Binding Source={x:Reference Name=collection}, Path=BindingContext.ChangeItemCommand}" CommandParameter="{Binding .}"/>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="5*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="5*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"/>
+                                        </Grid.RowDefinitions>
+                                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" Text="{Binding Id}" />
+                                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="{Binding Name}"/>
+                                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Text="{Binding Count}"/>
+                                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="3" Text="{Binding Cost}"/>
+                                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="4" Text="{Binding ItemType}"/>
+                                    </Grid>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </VerticalStackLayout>
         </StackLayout>
     </Grid>
 </ContentPage>
